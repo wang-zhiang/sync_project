@@ -1,6 +1,12 @@
+# 忽略所有的 csv 文件
+*.csv
+*.xls
+*.xlsx
+
+# 忽略 IDEA 的配置文件夹 (可选，建议加上)
 .idea/
 *.iml
-out/
+
+# 忽略编译产生的文件 (如果是 Java 项目)
 target/
-build/
-.DS_Store
+out/

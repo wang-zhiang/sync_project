@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>hbase_test</artifactId>
+        <groupId>com.sibo</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../hbase_test/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>ceshi</artifactId>
+    <packaging>pom</packaging>
+
+
+<dependencies>
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-core_2.12</artifactId>
+        <version>3.0.0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-sql_2.12</artifactId>
+        <version>3.0.0</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.jcraft</groupId>
+        <artifactId>jsch</artifactId>
+        <version>0.1.55</version>
+    </dependency>
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.10.0</version>
+        <scope>compile</scope>
+    </dependency>
+
+
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>2.14.1</version>
+    </dependency>
+
+
+
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.26</version>
+    </dependency>
+
+
+    <dependency>
+        <groupId>ru.yandex.clickhouse</groupId>
+        <artifactId>clickhouse-jdbc</artifactId>
+        <version>0.3.1</version>
+    </dependency>
+
+
+    <dependency>
+        <groupId>com.belerweb</groupId>
+        <artifactId>pinyin4j</artifactId>
+        <version>2.5.1</version>
+    </dependency>
+
+
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.0</version>
+    </dependency>
+
+    <dependency>
+    <groupId>com.microsoft.sqlserver</groupId>
+    <artifactId>mssql-jdbc</artifactId>
+    <version>8.4.1.jre8</version>
+    </dependency>
+
+
+
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>4.0.1</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-yarn_2.12</artifactId>
+        <version>3.0.0</version>
+        <!--<scope>provided</scope>-->
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-hive_2.12</artifactId>
+        <version>3.0.0</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.hive</groupId>
+        <artifactId>hive-jdbc</artifactId>
+        <version>3.0.0</version>
+
+
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.hive</groupId>
+        <artifactId>hive-service</artifactId>
+        <version>3.1.2</version>
+    </dependency>
+
+
+    <dependency>
+        <groupId>org.mongodb.spark</groupId>
+        <artifactId>mongo-spark-connector_2.12</artifactId>
+        <version>3.0.1</version>
+    </dependency>
+
+    <!-- MongoDB Java Driver (可能需要，取决于您的具体用例) -->
+    <dependency>
+        <groupId>org.mongodb</groupId>
+        <artifactId>mongodb-driver-sync</artifactId>
+        <version>4.1.0</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.hadoop.gplcompression</groupId>
+        <artifactId>hadoop-lzo</artifactId>
+        <version>0.4.20</version> <!-- 使用适合您环境的版本 -->
+    </dependency>
+
+
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>4.1.2</version>
+    </dependency>
+
+
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-csv</artifactId>
+        <version>1.8</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.elasticsearch.client</groupId>
+        <artifactId>elasticsearch-rest-high-level-client</artifactId>
+        <version>7.6.1</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpasyncclient</artifactId>
+        <version>4.1.4</version> <!-- 确保版本大于等于4.1.4 -->
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>4.5.13</version> <!-- 确保版本大于等于4.5 -->
+    </dependency>
+
+
+
+    <dependency>
+        <groupId>org.apache.flink</groupId>
+        <artifactId>flink-connector-jdbc</artifactId>
+        <version>1.15.3</version> <!-- 请根据你使用的 Flink 版本调整版本号 -->
+    </dependency>
+
+
+    <dependency>
+        <groupId>org.apache.flink</groupId>
+        <artifactId>flink-streaming-java</artifactId>
+        <version>1.15.3</version>
+    </dependency>
+
+
+
+    <dependency>
+        <groupId>io.debezium</groupId>
+        <artifactId>debezium-connector-sqlserver</artifactId>
+        <version>2.0.0.Final</version> <!-- 请根据需要调整版本 -->
+</dependency>
+
+    <dependency>
+        <groupId>org.apache.flink</groupId>
+        <artifactId>flink-java</artifactId>
+        <version>1.15.3</version>
+    </dependency>
+
+
+    <dependency>
+        <groupId>com.ververica</groupId>
+        <artifactId>flink-connector-sqlserver-cdc</artifactId>
+        <version>2.4.2</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.ververica</groupId>
+        <artifactId>flink-connector-debezium</artifactId>
+        <version>2.4.2</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.flink</groupId>
+        <artifactId>flink-table-api-java-bridge</artifactId>
+        <version>1.15.3</version>
+    </dependency>
+
+    <!-- JSON 序列化 -->
+    <dependency>
+        <groupId>org.apache.flink</groupId>
+        <artifactId>flink-json</artifactId>
+        <version>1.15.3</version>
+    </dependency>
+
+
+    <dependency>
+        <groupId>org.apache.flink</groupId>
+        <artifactId>flink-table-planner_2.12</artifactId>
+        <version>1.15.3</version>
+        <scope>compile</scope>
+
+ </dependency>
+
+
+
+
+        <!--&lt;!&ndash; POI for Excel &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.poi</groupId>-->
+            <!--<artifactId>poi</artifactId>-->
+            <!--<version>5.2.4</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.apache.poi</groupId>-->
+            <!--<artifactId>poi-scratchpad</artifactId>-->
+            <!--<version>5.2.4</version>-->
+        <!--</dependency>-->
+
+        <!--&lt;!&ndash; Tesseract OCR - 使用4.5.5版本更稳定 &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>net.sourceforge.tess4j</groupId>-->
+            <!--<artifactId>tess4j</artifactId>-->
+            <!--<version>4.5.5</version>-->
+        <!--</dependency>-->
+
+        <!--&lt;!&ndash; 排除冲突的JNA，使用兼容版本 &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>net.java.dev.jna</groupId>-->
+            <!--<artifactId>jna</artifactId>-->
+            <!--<version>5.8.0</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>net.java.dev.jna</groupId>-->
+            <!--<artifactId>jna-platform</artifactId>-->
+            <!--<version>5.8.0</version>-->
+        <!--</dependency>-->
+
+
+</dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+
+
+                </executions>
+
+
+
+            </plugin>
+
+
+
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>3.2.2</version>
+                <executions>
+                    <execution>
+                        <id>compile-scala</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>scala-compile-first</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+
+
+
+                </executions>
+            </plugin>
+
+
+
+
+        </plugins>
+
+
+
+
+    </build>
+
+
+
+
+</project>
+

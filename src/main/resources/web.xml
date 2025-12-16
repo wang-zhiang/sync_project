@@ -1,0 +1,9 @@
+<servlet>
+    <servlet-name>YourApiServlet_new</servlet-name>
+    <servlet-class>YourApiServlet_new</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>YourApiServlet_new</servlet-name>
+<url-pattern>/etl/sync</url-pattern>
+</servlet-mapping>

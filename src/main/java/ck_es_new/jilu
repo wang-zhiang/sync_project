@@ -1,0 +1,178 @@
+package ck_es_new;
+
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.elasticsearch.action.bulk.BulkRequest;
+import org.elasticsearch.action.bulk.BulkResponse;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.reindex.DeleteByQueryRequest;
+import ru.yandex.clickhouse.ClickHouseDataSource;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
+
+public class source4_ldl_month {
+
+    private static final String CLICKHOUSE_URL = "jdbc:clickhouse://hadoop110:8123";
+    private static final String CLICKHOUSE_USER = "default";  // 替换为你的用户名
+    private static final String CLICKHOUSE_PASSWORD = "smartpath";  // 替换为你的密码
+    private static final String ES_HOST = "192.168.6.102";  // Elasticsearch 主机地址
+    private static final int ES_PORT = 9202;  // Elasticsearch 端口
+    private static final String TABLE_NAME = "source4_ldl_CategoryI";  // ClickHouse 表名
+    private static final String WHERE_CONDITION_1 = "WHERE SP_Category_I = '化妆品'   limit 20000";  // 你的查询条件1
+    private static final String WHERE_CONDITION_2 = "WHERE SP_Category_I = '个人护理' limit 20000 ";  // 你的查询条件2
+    private static final String WHERE_CONDITION_3 = "WHERE SP_Category_I = '家用电器' limit 20000 ";  // 你的查询条件3
+
+    private static RestHighLevelClient esClient;
+
+    public static void main(String[] args) throws Exception {
+        // 1. 创建 Elasticsearch 客户端并添加身份验证
+        String esUsername = "elastic";  // 替换为你的ES用户名
+        String esPassword = "smartpath";  // 替换为你的ES密码
+
+        // 创建 HTTP 客户端构建器，添加身份验证
+        BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+        credentialsProvider.setCredentials(
+                new AuthScope(ES_HOST, ES_PORT),
+                new UsernamePasswordCredentials(esUsername, esPassword)
+        );
+
+        // 使用 HttpAsyncClientBuilder 创建 RestHighLevelClient
+        esClient = new RestHighLevelClient(
+                org.elasticsearch.client.RestClient.builder(
+                        new org.apache.http.HttpHost(ES_HOST, ES_PORT, "http"))
+                        .setHttpClientConfigCallback(httpClientBuilder ->
+                                httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider)
+                        )
+        );
+
+        // 2. 执行每个查询条件对应的导入任务
+        importDataToES("source4_ldl_test", WHERE_CONDITION_1);
+        importDataToES("source4_ldl_test2", WHERE_CONDITION_2);
+        importDataToES("source4_ldl_test3", WHERE_CONDITION_3);
+
+        // 3. 关闭 Elasticsearch 客户端
+        esClient.close();
+    }
+
+    // 导入数据到 Elasticsearch 的方法
+    private static void importDataToES(String esIndexName, String whereCondition) throws Exception {
+        logInfo("开始同步数据到 Elasticsearch 索引：" + esIndexName);
+
+        // 3.1. 删除 Elasticsearch 表中的数据
+        boolean deleteSuccess = deleteDataFromES(esIndexName);
+        if (deleteSuccess) {
+            logSuccess("成功删除索引 " + esIndexName + " 中的数据");
+        } else {
+            logError("删除索引 " + esIndexName + " 中的数据失败");
+        }
+
+        // 3.2. 连接到 ClickHouse
+        Connection connection = getClickHouseConnection();
+
+        // 3.3. 使用 WHERE 条件从 ClickHouse 查询数据
+        String query = "SELECT * FROM " + TABLE_NAME + " " + whereCondition;
+
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+
+        // 3.4. 准备 Elasticsearch 批量请求
+        BulkRequest bulkRequest = new BulkRequest();
+
+        int count = 0;
+        while (resultSet.next()) {
+            Map<String, Object> sourceMap = new HashMap<>();
+            int columnCount = resultSet.getMetaData().getColumnCount();
+
+            // 处理每一列
+            for (int i = 1; i <= columnCount; i++) {
+                String columnName = resultSet.getMetaData().getColumnName(i);
+                Object value = resultSet.getObject(i);
+                sourceMap.put(columnName, value);
+            }
+
+            // 创建 Elasticsearch 索引请求
+            bulkRequest.add(new org.elasticsearch.action.index.IndexRequest(esIndexName)
+                    .source(sourceMap, XContentType.JSON));
+
+            count++;
+
+            // 每 30000 条数据进行一次批量提交
+            if (count % 30000 == 0) {
+                BulkResponse bulkResponse = esClient.bulk(bulkRequest, RequestOptions.DEFAULT);
+                if (bulkResponse.hasFailures()) {
+                    logError("批量插入数据失败: " + bulkResponse.buildFailureMessage());
+                } else {
+                    logSuccess("成功批量插入 " + count + " 条数据");
+                }
+                bulkRequest = new BulkRequest();  // 重置批量请求
+            }
+        }
+
+        // 提交剩余的数据
+        if (count % 30000 != 0) {
+            BulkResponse bulkResponse = esClient.bulk(bulkRequest, RequestOptions.DEFAULT);
+            if (bulkResponse.hasFailures()) {
+                logError("批量插入剩余数据失败: " + bulkResponse.buildFailureMessage());
+            } else {
+                logSuccess("成功批量插入剩余数据");
+            }
+        }
+
+        // 关闭资源
+        resultSet.close();
+        statement.close();
+        connection.close();
+
+        logSuccess("成功同步数据到 Elasticsearch 索引：" + esIndexName);
+    }
+
+    // 从 Elasticsearch 删除数据
+    private static boolean deleteDataFromES(String esIndexName) {
+        try {
+            // 删除所有数据
+            DeleteByQueryRequest deleteRequest = new DeleteByQueryRequest(esIndexName);
+            deleteRequest.setQuery(org.elasticsearch.index.query.QueryBuilders.matchAllQuery());
+            esClient.deleteByQuery(deleteRequest, RequestOptions.DEFAULT);
+            return true;  // 删除成功
+        } catch (Exception e) {
+            logError("删除索引 " + esIndexName + " 中的数据时出错: " + e.getMessage());
+            return false;  // 删除失败
+        }
+    }
+
+    // 使用用户名和密码连接 ClickHouse
+    private static Connection getClickHouseConnection() throws SQLException {
+        // 将用户名和密码附加到 ClickHouse URL 中
+        String url = String.format("jdbc:clickhouse://%s/%s?user=%s&password=%s",
+                "hadoop110:8123",   // ClickHouse 主机和端口
+                "dwd",           // 默认数据库名称
+                CLICKHOUSE_USER,     // 用户名
+                CLICKHOUSE_PASSWORD  // 密码
+        );
+
+        // 使用构造好的 URL 创建连接
+        ClickHouseDataSource dataSource = new ClickHouseDataSource(url);
+        return dataSource.getConnection();
+    }
+
+    // 日志输出方法
+    private static void logInfo(String message) {
+        System.out.println("[INFO] " + message);
+    }
+
+    private static void logSuccess(String message) {
+        System.out.println("[SUCCESS] " + message);
+    }
+
+    private static void logError(String message) {
+        System.out.println("[ERROR] " + message);
+    }
+}
