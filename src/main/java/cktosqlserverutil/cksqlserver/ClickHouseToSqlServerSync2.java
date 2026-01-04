@@ -30,7 +30,7 @@ public class ClickHouseToSqlServerSync2 {
 
     // 性能配置
     private static final int THREAD_COUNT = 4;      // 线程数
-    private static final int BATCH_SIZE = 3000;     // 批量提交大小
+    private static final int BATCH_SIZE = 30000;     // 批量提交大小
 
     // =======================================================
 

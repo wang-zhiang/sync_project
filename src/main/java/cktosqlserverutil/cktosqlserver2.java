@@ -8,13 +8,13 @@ public class cktosqlserver2 {
 
     public static void main(String[] args) {
 
-        String clickhouseTableName = "predictions_20251209_152705";
-        String clickhouseDB = "ods";
-        String sqlserverconffiled ="select *  from   result";
-        String sqlserverurl ="jdbc:sqlserver://192.168.4.51;DatabaseName=Taobao_trading";
-        String sqlserverTable ="predictions_20251209_152705";
-        String sqlServerUser ="sa";
-        String sqlServerPassword = "smartpathdata";
+//        String clickhouseTableName = "predictions_20251209_152705";
+//        String clickhouseDB = "ods";
+//        String sqlserverconffiled ="select *  from   result";
+//        String sqlserverurl ="jdbc:sqlserver://192.168.4.51;DatabaseName=Taobao_trading";
+//        String sqlserverTable ="predictions_20251209_152705";
+//        String sqlServerUser ="sa";
+//        String sqlServerPassword = "smartpathdata";
 
 //        String clickhouseTableName = "BWB_traditional_channels";
 //        String clickhouseDB = "ods";
@@ -165,13 +165,13 @@ public class cktosqlserver2 {
 //        String sqlServerUser ="sa";
 //        String sqlServerPassword = "smartpthdata";
 
-//        String clickhouseTableName = "predictions_20251028_145924";
-//        String clickhouseDB = "ods";
-//        String sqlserverconffiled ="select * from  result   ";
-//        String sqlserverurl ="jdbc:sqlserver://192.168.4.57;DatabaseName=TradingDouYin";
-//        String sqlserverTable ="predictions_20251028_145924";
-//        String sqlServerUser ="sa";
-//        String sqlServerPassword = "smartpthdata";
+        String clickhouseTableName = "dy_shop_20260104";
+        String clickhouseDB = "ods";
+        String sqlserverconffiled ="select * from  result   ";
+        String sqlserverurl ="jdbc:sqlserver://192.168.4.57;DatabaseName=TradingDouYin";
+        String sqlserverTable ="dy_shop_20260104";
+        String sqlServerUser ="sa";
+        String sqlServerPassword = "smartpthdata";
 
 
 //        String clickhouseTableName = "predictions_20251204_143732";
@@ -182,11 +182,11 @@ public class cktosqlserver2 {
 //        String sqlServerUser ="sa";
 //        String sqlServerPassword = "smartpthdata";
 
-//        String clickhouseTableName = "mt_wine_20251208_result";
+//        String clickhouseTableName = "mt_qkl_20251224_result";
 //        String clickhouseDB = "ods";
 //        String sqlserverconffiled ="select  *  from  result";
 //        String sqlserverurl ="jdbc:sqlserver://192.168.4.39;DatabaseName=O2O";
-//        String sqlserverTable ="mt_wine_20251208_result";
+//        String sqlserverTable ="mt_qkl_20251224_result";
 //        String sqlServerUser ="sa";
 //        String sqlServerPassword = "smartpthdata";
 

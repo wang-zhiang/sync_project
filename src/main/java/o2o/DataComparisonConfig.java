@@ -1,4 +1,4 @@
-package sqlservertockutil.不经过linux同步;
+package o2o;
 
 import java.sql.*;
 import java.util.*;
@@ -10,6 +10,9 @@ import java.time.format.DateTimeFormatter;
  * 可配置的SQLServer与ClickHouse数据对比工具
  * 支持自定义服务器、表映射和日期字段
  * 支持起始月和结束月的累计查询
+ *
+ *  对比o2o的数据
+ *
  */
 public class DataComparisonConfig {
     

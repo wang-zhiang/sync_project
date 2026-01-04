@@ -19,11 +19,11 @@ import java.util.StringJoiner;
 
 public class from_csv_7_mergetree {
     public static void main(String[] args) {
-        String csvFile = "D:\\wzza\\develop\\idea_project\\ceshi\\src\\main\\java\\from_csv\\csv_file\\source4_ldl_other\\report_category_20251209_2.csv";
+        String csvFile = "D:\\wzza\\develop\\idea_project\\ceshi\\src\\main\\java\\from_csv\\csv_file\\source4_ldl_other\\20251230 新品类电热水器&洗衣机202508-202511补明细-张子寒 (1).csv";
         //String[] nodes = {"hadoop104", "hadoop105", "hadoop106", "hadoop107", "hadoop108", "hadoop109", "hadoop110"};
        String[] nodes = {"192.168.5.111"};
        // String[] nodes = {"192.168.5.110"};
-        String tableName = "ods.report_category_20251209_type2";
+        String tableName = "ods.source4_ldl_add_20260104";
 
 
         String orderByColumn = null; // 使用 CSV 文件中的第一个字段

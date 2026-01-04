@@ -10,9 +10,9 @@ public class main {
 
 
 
-        String clickhouseTable1 = "jd_huangou_spider";
-        String clickhouseUrl = "jdbc:clickhouse://hadoop110:8123";
-        String mongodbbase = "ec";
+        String clickhouseTable1 = "feigua_dy_month_all_cate_xpl";
+        String clickhouseUrl = "jdbc:clickhouse://192.168.5.111:8123";
+        String mongodbbase = "sc";
         String clickhousedatabase = "ods";
         String clickhouseTable = clickhousedatabase + "." + clickhouseTable1;
         String csvFile = "D:\\wzza\\develop\\idea_project\\ceshi\\src\\main\\java\\mongodbtoclickhouse\\a.csv";

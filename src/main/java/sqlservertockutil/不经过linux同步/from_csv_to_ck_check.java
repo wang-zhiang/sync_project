@@ -22,20 +22,21 @@ import java.util.concurrent.TimeUnit;
 public class from_csv_to_ck_check {
     // SQL Server连接详情
    // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.201:2422;DatabaseName=taobao_trading";
+   // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.35;DatabaseName=taobao_trading";
     //private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.212:2533;DatabaseName=websearchc";
     // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.51;DatabaseName=taobao_trading";
     //private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.3.182;DatabaseName=SyncWebSearchJD";
    // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.3.183;DatabaseName=sourcedate";
-     // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.36;DatabaseName=websearchc";
+      private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.36;DatabaseName=websearchc";
     //private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.38;DatabaseName=trading_medicine";
     // private static final String SQL_SERVER_URL = "jdbc:sqlserver://smartpath10.tpddns.cn:2988;DatabaseName=TradingDouYin";
-    //  private static final String SQL_SERVER_URL =  "jdbc:sqlserver://192.168.4.57;DatabaseName=TradingDouYin";
-    //private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.57;DatabaseName=WebSearchPinduoduo";
+     // private static final String SQL_SERVER_URL =  "jdbc:sqlserver://192.168.4.57;DatabaseName=TradingDouYin";
+   // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.57;DatabaseName=WebSearchPinduoduo";
     // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.3.181;DatabaseName=SyncTmallShop";
    // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.3.72;DatabaseName=TradingDouYin1111";
     // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.99.39:2800;DatabaseName=WebSearch";   //陈列
     // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.99.35:2766;DatabaseName=SearchCommentYHD";  //评价
-     private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.99.45:2866;DatabaseName=searchcommentY264_31"; // 评价
+    // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.99.45:2866;DatabaseName=searchcommentY264_31"; // 评价
 
 
 
@@ -46,7 +47,7 @@ public class from_csv_to_ck_check {
 //   private static final String SQL_SERVER_USER = "ldd";
 //    private static final String SQL_SERVER_PASSWORD = "W1t459";
 //   private static final String SQL_SERVER_USER = "sa";
-//    private static final String SQL_SERVER_PASSWORD = "smartpthdata";
+//    private static final String SQL_SERVER_PASSWORD = "smartpathdata";
     // ClickHouse连接详情
     //private static final String CLICKHOUSE_URL = "jdbc:clickhouse://hadoop110:8123/ods";
     private static final String CLICKHOUSE_URL = "jdbc:clickhouse://192.168.5.111:8123/";

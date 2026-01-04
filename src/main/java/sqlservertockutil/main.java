@@ -17,7 +17,7 @@ public class main {
 
         //String sqlServerUrl = "jdbc:sqlserver://192.168.4.39;DatabaseName=trading_medicinenew";  //京东到家的啤酒维度表
          //String sqlServerUrl = "jdbc:sqlserver://192.168.4.39;DatabaseName=trading_medicine";  //elmmt的啤酒维度表
-         //String sqlServerUrl = "jdbc:sqlserver://192.168.4.39;DatabaseName=o2o";
+        // String sqlServerUrl = "jdbc:sqlserver://192.168.4.39;DatabaseName=o2o";
           String sqlServerUrl = "jdbc:sqlserver://192.168.4.36;DatabaseName=websearchc";
       // String sqlServerUrl = "jdbc:sqlserver://192.168.4.40;DatabaseName=websearchc";
        // String sqlServerUrl = "jdbc:sqlserver://192.168.4.41;DatabaseName=Taobao_trading";
@@ -26,7 +26,7 @@ public class main {
         //String sqlServerUrl = "jdbc:sqlserver://192.168.4.35;DatabaseName=o2o";
         //String sqlServerUrl = "jdbc:sqlserver://192.168.4.36;DatabaseName=o2o";
        // String sqlServerUrl = "jdbc:sqlserver://192.168.4.201:2422;DatabaseName=Taobao_trading";
-      //String sqlServerUrl = "jdbc:sqlserver://192.168.4.51;DatabaseName=Taobao_trading";
+     // String sqlServerUrl = "jdbc:sqlserver://192.168.4.51;DatabaseName=Taobao_trading";
         //String sqlServerUrl = "jdbc:sqlserver://192.168.4.51;DatabaseName=pricetracking";
        //String sqlServerUrl = "jdbc:sqlserver://192.168.4.57;DatabaseName=TradingDouYin";
       //String sqlServerUrl = "jdbc:sqlserver://192.168.4.99:1444;DatabaseName=trading_HM";    //葡萄酒的盒马表所在地 维度表所在地
@@ -61,7 +61,7 @@ public class main {
 
         //加了条件下次用要去掉
         String cktable = "ods.jd_ai_fenlei_wfd" ;
-        String sqltable = "GVM减数表202510整合";
+        String sqltable = "JD_UnassignedProductPool";
         //String cktable = "ods.O2O_Beer_Adjust_new_two_month";
        // String conf = mssql_ck1.getConf(cktable, sqltable, sqlServerUrl, sqlServerUsername, sqlServerPassword);
         String conf = mssql_ck2_12.getConf(cktable, sqltable, sqlServerUrl, sqlServerUsername, sqlServerPassword);

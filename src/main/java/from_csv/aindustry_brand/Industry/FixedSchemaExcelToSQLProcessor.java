@@ -65,14 +65,14 @@ public class FixedSchemaExcelToSQLProcessor {
     
     public static void main(String[] args) {
 
-        String tableName = "ecommerce_insight_fixed_202510"; // 可以修改为用户指定的表名
+        String tableName = "ecommerce_insight_fixed_202511"; // 可以修改为用户指定的表名
         
         try {
             FixedSchemaExcelToSQLProcessor processor = new FixedSchemaExcelToSQLProcessor(tableName);
             processor.connectToDatabase();
             
             // 处理文件夹中的所有Excel文件
-            String basePath = "D:\\wzza\\develop\\idea_project\\ceshi\\src\\main\\java\\from_csv\\aindustry_brand\\Industry\\全域洞察1-5(全部更新版)\\2025-10行业洞察"; // 根据实际情况调整路径
+            String basePath = "D:\\wzza\\develop\\idea_project\\ceshi\\src\\main\\java\\from_csv\\aindustry_brand\\Industry\\全域洞察1-5(全部更新版)\\2025-11行业洞察"; // 根据实际情况调整路径
             processor.processExcelFiles(basePath);
             
             System.out.println("固定结构处理完成！数据已插入到表: " + tableName);

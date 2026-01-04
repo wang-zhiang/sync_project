@@ -30,7 +30,7 @@ object connhive {
     spark.sparkContext.hadoopConfiguration.addResource(hadoopConf)
 
     // 手动添加条件
-      val whereresult = "  where pt_ym = '202510'"
+      val whereresult = "  where pt_ym = '202511'"
     //val whereresult = "  where pt_ym >= '202101' and pt_ym <=  '202408' "
     val df = spark.sql(s"select * from  dwd.$hivetable" + whereresult)
     df.show()

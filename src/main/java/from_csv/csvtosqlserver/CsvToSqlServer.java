@@ -10,7 +10,7 @@ import org.apache.commons.csv.CSVRecord;
 public class CsvToSqlServer {
     
     // 配置变量 - 请根据需要修改
-    private static final String TABLE_NAME = "jd_normal_20251211"; // 目标表名
+    private static final String TABLE_NAME = "jd_normal_202512"; // 目标表名
     private static final String CSV_FILE_PATH = "D:\\wzza\\develop\\idea_project\\ceshi\\src\\main\\java\\from_csv\\csvtosqlserver\\data\\jd_normal.csv"; // CSV文件路径
     private static final String DB_URL = "jdbc:sqlserver://192.168.3.183;databaseName=SourceDate;";
     private static final String DB_USER = "sa";

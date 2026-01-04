@@ -20,7 +20,7 @@ public class MySQLSingleTableParallelSync {
     // ================= ⚙️ 配置区域 =================
 
     // 1. 表名
-    private static final String TABLE_NAME = "source_info";
+    private static final String TABLE_NAME = "supplier_order_notice";
 
     // 2. 主键列名 (必须是数字类型，用于切分数据)
     private static final String PRIMARY_KEY = "Id";

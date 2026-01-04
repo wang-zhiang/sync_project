@@ -43,11 +43,19 @@ public class cktosqlserver_temp {
 
 
 
-        String clickhouseTableName = "mtoriginaldetail";
+//        String clickhouseTableName = "mtoriginaldetail";
+//        String clickhouseDB = "ods";
+//        String sqlserverconffiled ="select  *  from  result where   pt_ym  >= '202301'   and pt_ym  <=   '202407'  and  IndustryId  = 73    and IndustrySubId = 148 ";
+//        String sqlserverurl ="jdbc:sqlserver://192.168.4.39;DatabaseName=O2O";
+//        String sqlserverTable ="mtoriginaldetail_wines_20251204";
+//        String sqlServerUser ="sa";
+//        String sqlServerPassword = "smartpthdata";
+
+        String clickhouseTableName = "elm_qkl_20251224_result";
         String clickhouseDB = "ods";
-        String sqlserverconffiled ="select  *  from  result where   pt_ym  >= '202301'   and pt_ym  <=   '202407'  and  IndustryId  = 73    and IndustrySubId = 148 ";
+        String sqlserverconffiled ="select  *  from  result";
         String sqlserverurl ="jdbc:sqlserver://192.168.4.39;DatabaseName=O2O";
-        String sqlserverTable ="mtoriginaldetail_wines_20251204";
+        String sqlserverTable ="elm_qkl_20251224_result";
         String sqlServerUser ="sa";
         String sqlServerPassword = "smartpthdata";
 

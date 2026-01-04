@@ -27,7 +27,7 @@ public class douyin_duohang {
     private static final String CLICKHOUSE_URL = "jdbc:clickhouse://hadoop110:8123/ods?";
     private static final String CLICKHOUSE_USER = "default";
     private static final String CLICKHOUSE_PASSWORD = "smartpath";
-    private static final String CLICKHOUSE_TABLE = "ods.dy_shop_20251208";
+    private static final String CLICKHOUSE_TABLE = "ods.dy_shop_20260104";
     private static final String OUTPUT_FILE = "D:\\wzza\\develop\\idea_project\\ceshi\\src\\main\\java\\from_csv\\csv_ck\\data_verification.xlsx";
 
     public static void main(String[] args) {
