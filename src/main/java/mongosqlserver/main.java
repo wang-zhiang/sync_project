@@ -40,10 +40,10 @@ public class main {
         //String sqlserverurl = "jdbc:sqlserver://192.168.3.183;DatabaseName=Trading_Naifen";
         //String sqlserverurl = "jdbc:sqlserver://192.168.3.183;DatabaseName=sourceDate";
        // String sqlserverurl = "jdbc:sqlserver://192.168.3.183;DatabaseName=Trading_Meizhuang";
-        // String sqlserverurl = "jdbc:sqlserver://192.168.4.99:1444;DatabaseName=ReportServer";  //叮咚买菜
+        // String sqlserverurl = "jdbc:sqlserver://192.168.4.99:1444;DatabaseName=ReportServer";  //叮咚买菜  小象超市
         // String sqlserverurl = "jdbc:sqlserver://192.168.99.45:2866;DatabaseName=wph264";   //京东的经常导入
         //String sqlserverurl = "jdbc:sqlserver://61.171.17.223:3088;DatabaseName=CommentJD";   //67号机
-        String sqlserverTable = "tiktok_shopdata_zst_202512";
+        String sqlserverTable = "tiktok_goods_comments_20260105_20260105";
 //        String sqlServerUser ="sa";
 //        String sqlServerPassword = "smartpthdata";
                 String sqlServerUser ="sa";

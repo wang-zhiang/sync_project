@@ -61,7 +61,7 @@ public class main {
 
         //加了条件下次用要去掉
         String cktable = "ods.jd_ai_fenlei_wfd" ;
-        String sqltable = "JD_UnassignedProductPool";
+        String sqltable = "ods.gmv_202511_zh";
         //String cktable = "ods.O2O_Beer_Adjust_new_two_month";
        // String conf = mssql_ck1.getConf(cktable, sqltable, sqlServerUrl, sqlServerUsername, sqlServerPassword);
         String conf = mssql_ck2_12.getConf(cktable, sqltable, sqlServerUrl, sqlServerUsername, sqlServerPassword);
