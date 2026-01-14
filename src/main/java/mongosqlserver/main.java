@@ -19,10 +19,10 @@ public class main {
         //盒马数据 .4.99:1444;DatabaseName=ReportServer
 
 
-        String mongodbbase = "sc";
+        String mongodbbase = "ec";
         String mongourl = "mongodb://smartpath:smartpthdata@192.168.5.101:27017,192.168.5.102:27017,192.168.5.103:27017/";
         //String sqlserverurl ="jdbc:sqlserver://192.168.4.39;DatabaseName=trading_medicinenew";
-        // String sqlserverurl ="jdbc:sqlserver://192.168.4.39;DatabaseName=o2o";
+         //String sqlserverurl ="jdbc:sqlserver://192.168.4.39;DatabaseName=o2o";
         //String sqlserverurl ="jdbc:sqlserver://192.168.4.36;DatabaseName=o2o";
          //String sqlserverurl ="jdbc:sqlserver://192.168.4.99:1444;DatabaseName=ReportServer";
         //String sqlserverurl ="jdbc:sqlserver://smartnew.tpddns.cn:28666;DatabaseName=NewMt";
@@ -30,20 +30,20 @@ public class main {
        // String sqlserverurl ="jdbc:sqlserver://192.168.4.35;DatabaseName=o2o";
        // String sqlserverurl ="jdbc:sqlserver://192.168.4.51;DatabaseName=Taobao_trading";
        //  String sqlserverurl ="jdbc:sqlserver://192.168.3.181:1433;DatabaseName=SyncTmallShop";
-         String sqlserverurl ="jdbc:sqlserver://192.168.4.57;DatabaseName=TradingDouYin";
+        // String sqlserverurl ="jdbc:sqlserver://192.168.4.57;DatabaseName=TradingDouYin";
          //String sqlserverurl ="jdbc:sqlserver://192.168.4.57;DatabaseName=TradingKS";
         // String sqlserverurl ="jdbc:sqlserver://192.168.4.51;DatabaseName=Pricetracking";
         //String sqlserverurl ="jdbc:sqlserver://smartnew.tpddns.cn:28666;DatabaseName=NewMt";
        // String sqlserverurl ="jdbc:sqlserver://192.168.3.72;DatabaseName=TradingDouYin1111";
        //String sqlserverurl = "jdbc:sqlserver://smartpath10.tpddns.cn:2988;DatabaseName=TradingDouYin";
-        //String sqlserverurl = "jdbc:sqlserver://192.168.3.182:1433;DatabaseName=SyncWebSearchJD";  //pdd_app_mall
+        String sqlserverurl = "jdbc:sqlserver://192.168.3.182:1433;DatabaseName=SyncWebSearchJD";  //pdd_app_mall
         //String sqlserverurl = "jdbc:sqlserver://192.168.3.183;DatabaseName=Trading_Naifen";
         //String sqlserverurl = "jdbc:sqlserver://192.168.3.183;DatabaseName=sourceDate";
        // String sqlserverurl = "jdbc:sqlserver://192.168.3.183;DatabaseName=Trading_Meizhuang";
-        // String sqlserverurl = "jdbc:sqlserver://192.168.4.99:1444;DatabaseName=ReportServer";  //叮咚买菜  小象超市
+         //String sqlserverurl = "jdbc:sqlserver://192.168.4.99:1444;DatabaseName=ReportServer";  //叮咚买菜  小象超市  盒马数据
         // String sqlserverurl = "jdbc:sqlserver://192.168.99.45:2866;DatabaseName=wph264";   //京东的经常导入
         //String sqlserverurl = "jdbc:sqlserver://61.171.17.223:3088;DatabaseName=CommentJD";   //67号机
-        String sqlserverTable = "tiktok_goods_comments_20260105_20260105";
+        String sqlserverTable = "pdd_app_detail_20260114";
 //        String sqlServerUser ="sa";
 //        String sqlServerPassword = "smartpthdata";
                 String sqlServerUser ="sa";

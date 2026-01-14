@@ -7,13 +7,15 @@ import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * MySQL到SQLServer多线程高可靠全量同步工具
+ * 不知道为啥elm_app就不行呢
  */
 public class MySQLToSQLServerMultiThreadSync {
     // ================== 参数配置 ==================
     // MySQL配置
     private static final String MYSQL_HOST = "101.89.122.158";
     private static final String MYSQL_DATABASE = "xhs_app";
-    private static final String MYSQL_TABLE = "xhs_set_spider_25_11_31";
+    //private static final String MYSQL_DATABASE = "eleme_app";
+    private static final String MYSQL_TABLE = "xhs_set_spider_25_12_23";
     private static final String MYSQL_URL = "jdbc:mysql://" + MYSQL_HOST + ":3306/" + MYSQL_DATABASE
             + "?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true"
             + "&connectTimeout=30000&socketTimeout=120000&autoReconnect=true&failOverReadOnly=false"
@@ -21,11 +23,11 @@ public class MySQLToSQLServerMultiThreadSync {
     private static final String MYSQL_USERNAME = "root";
     private static final String MYSQL_PASSWORD = "smartpath@123";
 
-    // SQLServer配置
-   // private static final String SQLSERVER_HOST = "192.168.4.39";
+    // SQLServer配置  String sqlserverurl = "jdbc:sqlserver://192.168.4.99:1444;DatabaseName=ReportServer"
+    //private static final String SQLSERVER_HOST = "192.168.4.99:1433";
     private static final String SQLSERVER_HOST = "192.168.3.183";
     private static final String SQLSERVER_DATABASE = "Trading_RedBook";
-    private static final String SQLSERVER_TABLE = "xhs_set_spider_25_11_31";
+    private static final String SQLSERVER_TABLE = "xhs_set_spider_25_12_23";
     private static final String SQLSERVER_URL = "jdbc:sqlserver://" + SQLSERVER_HOST + ";databaseName=" + SQLSERVER_DATABASE
             + ";trustServerCertificate=true;connectTimeout=30000;socketTimeout=1200000;loginTimeout=30000";
     private static final String SQLSERVER_USERNAME = "sa";

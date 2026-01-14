@@ -33,16 +33,16 @@ import java.util.concurrent.TimeUnit;
 
 public class spB2CWebsiteData_thread_new {
     // ser_num 配置：填数字表示写死的值，填"ser_num"表示使用SQL Server表中的ser_num字段值
-    private static final String SER_NUM_CONFIG = "121"; // 可改为 "ser_num" 或具体数字如 "35"
+    private static final String SER_NUM_CONFIG = "35"; // 可改为 "ser_num" 或具体数字如 "35"
     
     // SQL Server 连接信息
-    private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.99.39:2800;databaseName=WebSearch";
-    // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.99.35:2766;databaseName=SearchCommentYHD";
-   // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.99.45:2866;databaseName=searchcommentY264_31";
-    private static final String SQL_SERVER_USER = "sa";
-    private static final String SQL_SERVER_PASSWORD = "smartpthdata";
-//     private static final String SQL_SERVER_USER = "CHH";
-//    private static final String SQL_SERVER_PASSWORD = "Y1v606";
+    //private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.99.39:2800;databaseName=WebSearch";
+     //private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.99.35:2766;databaseName=SearchCommentYHD";
+    private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.99.45:2866;databaseName=searchcommentY264_31";
+//    private static final String SQL_SERVER_USER = "sa";
+//    private static final String SQL_SERVER_PASSWORD = "smartpthdata";
+     private static final String SQL_SERVER_USER = "CHH";
+    private static final String SQL_SERVER_PASSWORD = "Y1v606";
     // ClickHouse 连接信息
     private static final String CLICKHOUSE_URL = "jdbc:clickhouse://hadoop110:8123";
     private static final String CLICKHOUSE_USER = "default";

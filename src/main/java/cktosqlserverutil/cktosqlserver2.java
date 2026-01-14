@@ -8,11 +8,11 @@ public class cktosqlserver2 {
 
     public static void main(String[] args) {
 
-//        String clickhouseTableName = "predictions_20251209_152705";
+//        String clickhouseTableName = "predictions_20260109_154611";
 //        String clickhouseDB = "ods";
 //        String sqlserverconffiled ="select *  from   result";
 //        String sqlserverurl ="jdbc:sqlserver://192.168.4.51;DatabaseName=Taobao_trading";
-//        String sqlserverTable ="predictions_20251209_152705";
+//        String sqlserverTable ="predictions_20260109_154611";
 //        String sqlServerUser ="sa";
 //        String sqlServerPassword = "smartpathdata";
 
@@ -35,11 +35,11 @@ public class cktosqlserver2 {
 //        String sqlServerUser ="CHH";
 //        String sqlServerPassword = "Y1v606";
 
-//        String clickhouseTableName = "predictions_20251205_221443";
+//        String clickhouseTableName = "predictions_20260109_124518";
 //        String clickhouseDB = "ods";
 //        String sqlserverconffiled ="select * from result ";
 //        String sqlserverurl ="jdbc:sqlserver://192.168.4.36;DatabaseName=WebsearchC";
-//        String sqlserverTable ="predictions_20251205_221443";
+//        String sqlserverTable ="predictions_20260109_124518";
 //        String sqlServerUser ="CHH";
 //        String sqlServerPassword = "Y1v606";
 
@@ -157,21 +157,21 @@ public class cktosqlserver2 {
 //        String sqlServerPassword = "smartpthdata";
 
 
-//        String clickhouseTableName = "dy_shop_20251208";
-//        String clickhouseDB = "ods";
-//        String sqlserverconffiled ="select * from result";
-//        String sqlserverurl ="jdbc:sqlserver://192.168.3.183;DatabaseName=sourcedate";
-//        String sqlserverTable ="dy_shop_20251208";
-//        String sqlServerUser ="sa";
-//        String sqlServerPassword = "smartpthdata";
-
-        String clickhouseTableName = "dy_shop_20260104";
+        String clickhouseTableName = "kzb_dy_20260111";
         String clickhouseDB = "ods";
-        String sqlserverconffiled ="select * from  result   ";
-        String sqlserverurl ="jdbc:sqlserver://192.168.4.57;DatabaseName=TradingDouYin";
-        String sqlserverTable ="dy_shop_20260104";
+        String sqlserverconffiled ="select * from result";
+        String sqlserverurl ="jdbc:sqlserver://192.168.3.183;DatabaseName=sourcedate";
+        String sqlserverTable ="kzb_dy_20260111";
         String sqlServerUser ="sa";
         String sqlServerPassword = "smartpthdata";
+
+//        String clickhouseTableName = "dy_shop_20260104";
+//        String clickhouseDB = "ods";
+//        String sqlserverconffiled ="select * from  result   ";
+//        String sqlserverurl ="jdbc:sqlserver://192.168.4.57;DatabaseName=TradingDouYin";
+//        String sqlserverTable ="dy_shop_20260104";
+//        String sqlServerUser ="sa";
+//        String sqlServerPassword = "smartpthdata";
 
 
 //        String clickhouseTableName = "predictions_20251204_143732";

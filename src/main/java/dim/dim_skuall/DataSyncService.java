@@ -29,7 +29,8 @@ public class DataSyncService {
             syncService.loadConfig("D:\\wzza\\develop\\idea_project\\ceshi\\src\\main\\java\\dim\\dim_skuall\\task.yaml");
 
             // 设置要同步的taskId
-            String taskId = "skuall";
+           // String taskId = "skuall";
+            String taskId = "DabaojianSkuType";
 
             System.out.println("========================================");
             System.out.println("   数据同步工作脚本开始执行");

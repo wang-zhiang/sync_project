@@ -24,13 +24,13 @@ public class from_csv_to_ck_check {
    // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.201:2422;DatabaseName=taobao_trading";
    // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.35;DatabaseName=taobao_trading";
     //private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.212:2533;DatabaseName=websearchc";
-    // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.51;DatabaseName=taobao_trading";
+   //  private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.51;DatabaseName=taobao_trading";
     //private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.3.182;DatabaseName=SyncWebSearchJD";
    // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.3.183;DatabaseName=sourcedate";
-      private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.36;DatabaseName=websearchc";
+   //   private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.36;DatabaseName=websearchc";
     //private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.38;DatabaseName=trading_medicine";
     // private static final String SQL_SERVER_URL = "jdbc:sqlserver://smartpath10.tpddns.cn:2988;DatabaseName=TradingDouYin";
-     // private static final String SQL_SERVER_URL =  "jdbc:sqlserver://192.168.4.57;DatabaseName=TradingDouYin";
+      private static final String SQL_SERVER_URL =  "jdbc:sqlserver://192.168.4.57;DatabaseName=TradingDouYin";
    // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.57;DatabaseName=WebSearchPinduoduo";
     // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.3.181;DatabaseName=SyncTmallShop";
    // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.3.72;DatabaseName=TradingDouYin1111";
@@ -40,17 +40,17 @@ public class from_csv_to_ck_check {
 
 
 
-    private static final String SQL_SERVER_USER = "CHH";
-    private static final String SQL_SERVER_PASSWORD = "Y1v606";
+//    private static final String SQL_SERVER_USER = "CHH";
+//    private static final String SQL_SERVER_PASSWORD = "Y1v606";
 //    private static final String SQL_SERVER_USER = "sa";
 //    private static final String SQL_SERVER_PASSWORD = "smartpthdata";
 //   private static final String SQL_SERVER_USER = "ldd";
 //    private static final String SQL_SERVER_PASSWORD = "W1t459";
-//   private static final String SQL_SERVER_USER = "sa";
-//    private static final String SQL_SERVER_PASSWORD = "smartpathdata";
+   private static final String SQL_SERVER_USER = "sa";
+    private static final String SQL_SERVER_PASSWORD = "smartpthdata";
     // ClickHouse连接详情
-    //private static final String CLICKHOUSE_URL = "jdbc:clickhouse://hadoop110:8123/ods";
-    private static final String CLICKHOUSE_URL = "jdbc:clickhouse://192.168.5.111:8123/";
+    private static final String CLICKHOUSE_URL = "jdbc:clickhouse://hadoop110:8123/ods";
+   // private static final String CLICKHOUSE_URL = "jdbc:clickhouse://192.168.5.111:8123/";
     private static final String CLICKHOUSE_USER = "default";
     private static final String CLICKHOUSE_PASSWORD = "smartpath";
     private static final String CLICKHOUSE_DATABASE = "ods";

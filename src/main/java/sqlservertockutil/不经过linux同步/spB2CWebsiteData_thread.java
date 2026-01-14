@@ -28,12 +28,12 @@ import java.util.concurrent.TimeUnit;
 public class spB2CWebsiteData_thread {
     // SQL Server 连接信息
     // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.99.39:2800;databaseName=WebSearch";
-   // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.99.35:2766;databaseName=SearchCommentYHD";
-    private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.99.45:2866;databaseName=searchcommentY264_31";
-//    private static final String SQL_SERVER_USER = "sa";
-//    private static final String SQL_SERVER_PASSWORD = "smartpthdata";
-     private static final String SQL_SERVER_USER = "CHH";
-    private static final String SQL_SERVER_PASSWORD = "Y1v606";
+    private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.99.35:2766;databaseName=SearchCommentYHD";
+   // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.99.45:2866;databaseName=searchcommentY264_31";
+    private static final String SQL_SERVER_USER = "sa";
+    private static final String SQL_SERVER_PASSWORD = "smartpthdata";
+//     private static final String SQL_SERVER_USER = "CHH";
+//    private static final String SQL_SERVER_PASSWORD = "Y1v606";
     // ClickHouse 连接信息
     private static final String CLICKHOUSE_URL = "jdbc:clickhouse://hadoop110:8123";
     private static final String CLICKHOUSE_USER = "default";

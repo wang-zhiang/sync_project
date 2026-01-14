@@ -37,7 +37,7 @@ public class MySQLToClickHouseSync {
         // ==================== 配置区域 ====================
         
         // 数据库连接配置
-        String clickhouseUrl = "jdbc:clickhouse://192.168.5.111:8123";
+        String clickhouseUrl = "jdbc:clickhouse://192.168.5.110:8123";
         String mysqlUrl = "jdbc:mysql://192.168.3.138:3306/smartpath_admin?useSSL=false";
         String clickhouseUser = "default";
         String clickhousePassword = "smartpath";
@@ -46,8 +46,11 @@ public class MySQLToClickHouseSync {
         String mysqlPassword = "smartpthdata";
 
         // 表配置
-        String clickhouseTableName = "ods.online_processing_count";  // ClickHouse 表名 (database.table)
-        String mysqlTableName = "online_processing_count";               // MySQL 表名
+        //select * from sys_channel_site_grand
+        //select * from sys_channel_site_grand_industrytype
+
+        String clickhouseTableName = "dim.sys_channel_site_grand_industrytype";  // ClickHouse 表名 (database.table)
+        String mysqlTableName = "sys_channel_site_grand_industrytype";               // MySQL 表名
         String whereCondition = "1 = 1";                 // 可选的WHERE条件
         
         // ⭐ 同步模式配置 - 请在这里选择同步模式
