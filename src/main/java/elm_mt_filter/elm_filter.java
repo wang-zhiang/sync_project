@@ -43,7 +43,7 @@ public class elm_filter {
 
                 System.out.println("Key: " + key + ", Value: " + value);
 
-                datainsert(key, "202512", value, "eleme");
+                datainsert(key, "202601", value, "eleme");
             }
         }
 
@@ -113,7 +113,7 @@ public class elm_filter {
         String  clickhouseDB = "test";
         String  sqlserverconffiled = "select * from result";
         String  sqlserverurl = "jdbc:sqlserver://192.168.4.39;DatabaseName=o2o";
-        String  sqlserverTable = "goods_info_eleme_week202512";
+        String  sqlserverTable = "goods_info_eleme_week202601";
         String  sqlServerUser = "sa";
         String  sqlServerPassword = "smartpthdata";
         try {

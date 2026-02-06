@@ -11,8 +11,8 @@ import org.apache.spark.sql.types._
 * result.show() 就会输出到console里，就不会往下执行了
 * */
 object  cktosql {
-  // val clickhouseUrl1 = "jdbc:clickhouse://192.168.5.110:8123"
-  val clickhouseUrl1 = "jdbc:clickhouse://192.168.5.111:8123"
+   val clickhouseUrl1 = "jdbc:clickhouse://192.168.5.110:8123"
+ // val clickhouseUrl1 = "jdbc:clickhouse://192.168.5.111:8123"
   val clickhouseUser = "default"
   val clickhousePassword = "smartpath"
 

@@ -15,7 +15,7 @@ public class MySQLToSQLServerMultiThreadSync {
     private static final String MYSQL_HOST = "101.89.122.158";
     private static final String MYSQL_DATABASE = "xhs_app";
     //private static final String MYSQL_DATABASE = "eleme_app";
-    private static final String MYSQL_TABLE = "xhs_set_spider_25_12_23";
+    private static final String MYSQL_TABLE = "xhs_set_spider_26_01_22";
     private static final String MYSQL_URL = "jdbc:mysql://" + MYSQL_HOST + ":3306/" + MYSQL_DATABASE
             + "?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true"
             + "&connectTimeout=30000&socketTimeout=120000&autoReconnect=true&failOverReadOnly=false"
@@ -27,7 +27,7 @@ public class MySQLToSQLServerMultiThreadSync {
     //private static final String SQLSERVER_HOST = "192.168.4.99:1433";
     private static final String SQLSERVER_HOST = "192.168.3.183";
     private static final String SQLSERVER_DATABASE = "Trading_RedBook";
-    private static final String SQLSERVER_TABLE = "xhs_set_spider_25_12_23";
+    private static final String SQLSERVER_TABLE = "xhs_set_spider_26_01_22";
     private static final String SQLSERVER_URL = "jdbc:sqlserver://" + SQLSERVER_HOST + ";databaseName=" + SQLSERVER_DATABASE
             + ";trustServerCertificate=true;connectTimeout=30000;socketTimeout=1200000;loginTimeout=30000";
     private static final String SQLSERVER_USERNAME = "sa";
@@ -35,7 +35,7 @@ public class MySQLToSQLServerMultiThreadSync {
 
     // 同步配置
     private static final int THREAD_COUNT = 5;
-    private static final int BATCH_SIZE = 5000;
+    private static final int BATCH_SIZE = 10000;
     private static final int MAX_RETRY = 8;
     private static final int RETRY_DELAY_MS = 8000;
     private static final int QUERY_TIMEOUT = 300;

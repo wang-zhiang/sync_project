@@ -8,14 +8,15 @@ public class cktosqlserver2 {
 
     public static void main(String[] args) {
 
-//        String clickhouseTableName = "predictions_20260109_154611";
+//        String clickhouseTableName = "hzp_brand_model_disanfang_processed";
 //        String clickhouseDB = "ods";
 //        String sqlserverconffiled ="select *  from   result";
 //        String sqlserverurl ="jdbc:sqlserver://192.168.4.51;DatabaseName=Taobao_trading";
-//        String sqlserverTable ="predictions_20260109_154611";
+//        String sqlserverTable ="hzp_brand_model_disanfang_processed_tm";
 //        String sqlServerUser ="sa";
 //        String sqlServerPassword = "smartpathdata";
 
+//        String clickhouseTableName = "BWB_traditional_channels";
 //        String clickhouseTableName = "BWB_traditional_channels";
 //        String clickhouseDB = "ods";
 //        String sqlserverconffiled ="select * from result";
@@ -35,11 +36,11 @@ public class cktosqlserver2 {
 //        String sqlServerUser ="CHH";
 //        String sqlServerPassword = "Y1v606";
 
-//        String clickhouseTableName = "predictions_20260109_124518";
+//        String clickhouseTableName = "hzp_brand_model_disanfang_processed";
 //        String clickhouseDB = "ods";
-//        String sqlserverconffiled ="select * from result ";
+//        String sqlserverconffiled ="select *  from   result where qudao = 'B2C'";
 //        String sqlserverurl ="jdbc:sqlserver://192.168.4.36;DatabaseName=WebsearchC";
-//        String sqlserverTable ="predictions_20260109_124518";
+//        String sqlserverTable ="hzp_brand_model_disanfang_processed_b2c";
 //        String sqlServerUser ="CHH";
 //        String sqlServerPassword = "Y1v606";
 
@@ -157,38 +158,38 @@ public class cktosqlserver2 {
 //        String sqlServerPassword = "smartpthdata";
 
 
-        String clickhouseTableName = "kzb_dy_20260111";
-        String clickhouseDB = "ods";
-        String sqlserverconffiled ="select * from result";
-        String sqlserverurl ="jdbc:sqlserver://192.168.3.183;DatabaseName=sourcedate";
-        String sqlserverTable ="kzb_dy_20260111";
-        String sqlServerUser ="sa";
-        String sqlServerPassword = "smartpthdata";
+//        String clickhouseTableName = "kzb_dy_20260111";
+//        String clickhouseDB = "ods";
+//        String sqlserverconffiled ="select * from result";
+//        String sqlserverurl ="jdbc:sqlserver://192.168.3.183;DatabaseName=sourcedate";
+//        String sqlserverTable ="kzb_dy_20260111";
+//        String sqlServerUser ="sa";
+//        String sqlServerPassword = "smartpthdata";
 
-//        String clickhouseTableName = "dy_shop_20260104";
+//        String clickhouseTableName = "hzp_brand_model_disanfang_pdd_dy_processed";
 //        String clickhouseDB = "ods";
 //        String sqlserverconffiled ="select * from  result   ";
 //        String sqlserverurl ="jdbc:sqlserver://192.168.4.57;DatabaseName=TradingDouYin";
-//        String sqlserverTable ="dy_shop_20260104";
+//        String sqlserverTable ="hzp_brand_model_disanfang_pdd_dy_processed";
 //        String sqlServerUser ="sa";
 //        String sqlServerPassword = "smartpthdata";
 
 
-//        String clickhouseTableName = "predictions_20251204_143732";
+//        String clickhouseTableName = "predictions_20260130_160802 ";
 //        String clickhouseDB = "ods";
 //        String sqlserverconffiled ="select * from  result   ";
 //        String sqlserverurl ="jdbc:sqlserver://192.168.4.57;DatabaseName=WebSearchPinduoduo";
-//        String sqlserverTable ="predictions_20251204_143732";
+//        String sqlserverTable ="predictions_20260130_160802 ";
 //        String sqlServerUser ="sa";
 //        String sqlServerPassword = "smartpthdata";
 
-//        String clickhouseTableName = "mt_qkl_20251224_result";
-//        String clickhouseDB = "ods";
-//        String sqlserverconffiled ="select  *  from  result";
-//        String sqlserverurl ="jdbc:sqlserver://192.168.4.39;DatabaseName=O2O";
-//        String sqlserverTable ="mt_qkl_20251224_result";
-//        String sqlServerUser ="sa";
-//        String sqlServerPassword = "smartpthdata";
+        String clickhouseTableName = "mt_plastic_wrap_20260202_result";
+        String clickhouseDB = "ods";
+        String sqlserverconffiled ="select  *  from  result";
+        String sqlserverurl ="jdbc:sqlserver://192.168.4.39;DatabaseName=O2O";
+        String sqlserverTable ="mt_plastic_wrap_20260202_result";
+        String sqlServerUser ="sa";
+        String sqlServerPassword = "smartpthdata";
 
 //        String clickhouseTableName = "ls_liquor_0411";
 //        String clickhouseDB = "ods";

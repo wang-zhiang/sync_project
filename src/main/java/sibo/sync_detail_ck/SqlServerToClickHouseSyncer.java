@@ -6,7 +6,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.*;
 
+//临时同步价格的好像是
+
+
 public class SqlServerToClickHouseSyncer {
+
+
 
     // MySQL 配置源
     private static final String MYSQL_URL = "jdbc:mysql://192.168.3.138:3306/smartpath_admin?useSSL=false&serverTimezone=UTC&characterEncoding=utf8";

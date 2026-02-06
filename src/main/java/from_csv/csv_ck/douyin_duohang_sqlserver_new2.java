@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 
 //目前用这个，因为有三行的还有一行的，这个都能兼容
-public class douyin_duohang_sqlserver_new {
+public class douyin_duohang_sqlserver_new2 {
     private static final String INPUT_FOLDER = "D:\\wzza\\develop\\idea_project\\ceshi\\src\\main\\java\\from_csv\\csv_ck\\抖音";
 
     // SQL Server 配置
@@ -23,7 +23,7 @@ public class douyin_duohang_sqlserver_new {
     private static final String DB_URL = "jdbc:sqlserver://192.168.4.57;DatabaseName=TradingDouYin;encrypt=false;trustServerCertificate=true";
     private static final String DB_USER = "sa";
     private static final String DB_PASSWORD = "smartpthdata";
-    private static final String TABLE_NAME = "dy_s3_shop_202601_ceshi";
+    private static final String TABLE_NAME = "dy_s3_shop_202601_test";
 
     private static final String OUTPUT_FILE = "D:\\wzza\\develop\\idea_project\\ceshi\\src\\main\\java\\from_csv\\csv_ck\\data_verification.xlsx";
 
@@ -109,14 +109,39 @@ public class douyin_duohang_sqlserver_new {
 
                                     if (rowTop == null && rowName == null) continue;
 
-                                    // 过滤汇总行
+                                    // ================== 修改开始 ==================
+
+                                    // 1. 获取 A 列的内容（商品名称候选）
+                                    String valCheck = "";
                                     if (rowName != null) {
-                                        String val = getCellValue(rowName.getCell(0));
-                                        if (val.contains("本页合计") || val.contains("全部合计")) continue;
+                                        valCheck = getCellValue(rowName.getCell(0));
+                                    } else if (rowTop != null) {
+                                        // 防御性代码，如果rowName为空，尝试看rowTop
+                                        valCheck = getCellValue(rowTop.getCell(0));
                                     }
-                                    if (rowTop != null && rowTop != rowName) {
-                                        String val = getCellValue(rowTop.getCell(0));
-                                        if (val.contains("本页合计") || val.contains("全部合计")) continue;
+
+                                    // 2. 执行过滤逻辑
+                                    // 2.1 空值检查
+                                    if (valCheck == null || valCheck.trim().isEmpty()) continue;
+
+                                    // 2.2 关键词过滤：过滤 "合计"、"条/页"、"共xx条"
+                                    if (valCheck.contains("本页合计") ||
+                                            valCheck.contains("全部合计") ||
+                                            valCheck.contains("条/页")) {
+                                        continue;
+                                    }
+
+                                    // 2.3 纯数字过滤：使用正则匹配纯数字 (例如 "2", "3", "100")
+                                    // ^\d+$ 表示从头到尾只有数字
+                                    if (valCheck.matches("^\\d+$")) {
+                                        System.out.println("   -> 跳过页码行/纯数字行: " + valCheck);
+                                        continue;
+                                    }
+
+                                     // 2.4 (可选) 长度过滤：商品名称通常较长，如果长度小于2且不是特殊符号，可能也是垃圾数据
+                                    if (valCheck.length() < 2) {
+                                        System.out.println("   -> 跳过过短数据: " + valCheck);
+                                        continue;
                                     }
 
                                     // --- 1. 获取 ItemName & ID ---

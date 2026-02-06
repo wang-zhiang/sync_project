@@ -16,18 +16,18 @@ public class mt_filter {
         finalList.add(get_itemname_where.categorizeAndGenerateQuery(keywords));
   //      get_itemname_where.printFinalList(finalList);
 
-//        for (Map<String, String> map : finalList) {
-//            // 遍历当前 Map 对象中的键值对
-//            for (Map.Entry<String, String> entry : map.entrySet()) {
-//                String key = entry.getKey();
-//                String value = entry.getValue();
-//
-//                //药店的
-//                datainsert(key, "202508", value,"mt_durg");
-//            }
-//        }
+        for (Map<String, String> map : finalList) {
+            // 遍历当前 Map 对象中的键值对
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                String key = entry.getKey();
+                String value = entry.getValue();
+
+                //药店的
+                datainsert(key, "202601", value,"mt_durg");
+            }
+        }
    //     超市的，超市不用过滤
-        datainsert("", "202508", "1 = 1 ","mt_durg1");
+  //      datainsert("", "202601", "1 = 1 ","mt_durg");
      }
 
 
@@ -91,7 +91,7 @@ public class mt_filter {
         String  clickhouseDB = "test";
         String  sqlserverconffiled = "select * from result";
         String  sqlserverurl = "jdbc:sqlserver://192.168.4.39;DatabaseName=o2o";
-        String  sqlserverTable = "TradingMtDrugAllCity202508_mtdurg1";
+        String  sqlserverTable = "TradingMtDrugAllCity202601";
         String  sqlServerUser = "sa";
         String  sqlServerPassword = "smartpthdata";
         try {
