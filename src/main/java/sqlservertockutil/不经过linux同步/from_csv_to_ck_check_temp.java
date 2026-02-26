@@ -1,72 +1,68 @@
 package sqlservertockutil.不经过linux同步;
 
 import au.com.bytecode.opencsv.CSVReader;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-//test_0724,test_0724_new （csv数据格式）  可做测试，时区
-
+//根据条件同步 ，
 
 public class from_csv_to_ck_check_temp {
-    // SQL Server连接详情
-   // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.201:2422;DatabaseName=taobao_trading";
+    // ==========================================
+    // 数据库连接配置
+    // ==========================================
+   // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.51;DatabaseName=taobao_trading";
+   // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.36;DatabaseName=websearchc";
     //private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.212:2533;DatabaseName=websearchc";
-     //private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.51;DatabaseName=taobao_trading";
-    //private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.3.182;DatabaseName=SyncWebSearchJD";
-   // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.3.183;DatabaseName=sourcedate";
-    //  private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.36;DatabaseName=websearchc";
-    //private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.38;DatabaseName=trading_medicine";
-    // private static final String SQL_SERVER_URL = "jdbc:sqlserver://smartpath10.tpddns.cn:2988;DatabaseName=TradingDouYin";
-      private static final String SQL_SERVER_URL =  "jdbc:sqlserver://192.168.4.57;DatabaseName=TradingDouYin";
-    //private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.57;DatabaseName=WebSearchPinduoduo";
-    // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.3.181;DatabaseName=SyncTmallShop";
-   // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.3.72;DatabaseName=TradingDouYin1111";
-     //private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.99.39:2800;DatabaseName=WebSearch";
-   // private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.99.35:2766;DatabaseName=SearchCommentYHD";
-
-
-
+   // private static final String SQL_SERVER_URL =  "jdbc:sqlserver://192.168.4.57;DatabaseName=TradingDouYin";
+     private static final String SQL_SERVER_URL = "jdbc:sqlserver://192.168.4.57;DatabaseName=WebSearchPinduoduo";
+     private static final String SQL_SERVER_USER = "sa";
+    private static final String SQL_SERVER_PASSWORD = "smartpthdata";
 //    private static final String SQL_SERVER_USER = "CHH";
 //    private static final String SQL_SERVER_PASSWORD = "Y1v606";
-//    private static final String SQL_SERVER_USER = "sa";
-//    private static final String SQL_SERVER_PASSWORD = "smartpthdata";
-//   private static final String SQL_SERVER_USER = "ldd";
-//    private static final String SQL_SERVER_PASSWORD = "W1t459";
-   private static final String SQL_SERVER_USER = "sa";
-    private static final String SQL_SERVER_PASSWORD = "smartpthdata";
-    // ClickHouse连接详情
-   // private static final String CLICKHOUSE_URL = "jdbc:clickhouse://hadoop110:8123/ods";
-   private static final String CLICKHOUSE_URL = "jdbc:clickhouse://192.168.5.111:8123/";
+
+
+    private static final String CLICKHOUSE_URL = "jdbc:clickhouse://192.168.5.111:8123/";
     private static final String CLICKHOUSE_USER = "default";
     private static final String CLICKHOUSE_PASSWORD = "smartpath";
-    private static final String CLICKHOUSE_DATABASE = "ods";
+    private static final String CLICKHOUSE_DATABASE = "tmp";
 
     // 插入的批处理大小
     private static final int BATCH_SIZE = 30000;
 
-    // SQL Server查询模板
-    private static final String SQL_SERVER_QUERY_TEMPLATE = "SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS RowNum FROM %s) AS TempTable WHERE RowNum %% 10 = ?"; // 分片查询模板
+    // ==========================================
+    // 新增：自定义 WHERE 条件配置 (让你自己定义)
+    // 注意：请以 "WHERE " 开头。如果全量同步，请保持为空字符串 ""
+    // ==========================================
+
+    // 1. 用于 SQL Server 数据拉取和核验的条件
+    // 例如: "WHERE AddDate >= '2025-02-01 00:00:00' AND AddDate < '2025-03-01 00:00:00'"
+    // 或者: "WHERE CONVERT(varchar(6), AddDate, 112) = '202512'"
+    private static final String CUSTOM_WHERE_SQLSERVER = "WHERE  CONVERT(varchar(6), AddDate, 112) = '202601'";
+
+    // 2. 用于 ClickHouse 最终核验数据量的条件
+    // 注意: ClickHouse 中的列名已经经过 chineseToPinyin 转换，请使用转换后的列名
+    // 例如: "WHERE adddate >= '2025-02-01 00:00:00' AND adddate < '2025-03-01 00:00:00'"
+    private static final String CUSTOM_WHERE_CLICKHOUSE = "WHERE formatDateTime(AddDate, '%Y%m') = '202601' ";
+
 
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis(); // 记录开始时间
 
         Map<String, String> tableMappings = readCSV("D:\\wzza\\develop\\idea_project\\ceshi\\src\\main\\java\\sqlservertockutil\\不经过linux同步\\a.csv");
 
-        // 创建一个包含5个线程的线程池
+        // 创建一个包含10个线程的线程池
         ExecutorService executorService = Executors.newFixedThreadPool(10);
 
         // 循环处理每个表的分片
@@ -98,9 +94,9 @@ public class from_csv_to_ck_check_temp {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         long endTime = System.currentTimeMillis(); // 记录结束时间
         long totalTime = endTime - startTime; // 计算总用时
-        // 转换总用时为小时、分钟和秒
         long totalSeconds = totalTime / 1000;
         long hours = totalSeconds / 3600;
         long minutes = (totalSeconds % 3600) / 60;
@@ -126,144 +122,112 @@ public class from_csv_to_ck_check_temp {
             resultSet = sqlServerStatement.executeQuery("SELECT * FROM " + sqlServerTableName + " WHERE 1 = 0"); // 获取列信息
             ResultSetMetaData metaData = resultSet.getMetaData();
             int columnCount = metaData.getColumnCount();
-            System.out.println("Column count: " + columnCount);
-            for (int i = 1; i <= columnCount; i++) {
-                System.out.println("Column " + i + ": " + metaData.getColumnName(i) + " (" + metaData.getColumnTypeName(i) + ")");
+
+            if (partition == 0) {
+                System.out.println("Column count: " + columnCount);
             }
+
             StringBuilder columns = new StringBuilder();
             StringBuilder placeholders = new StringBuilder();
             StringBuilder createTableQuery = new StringBuilder();
             String firstColumn = null;
-            Set<String> usedNames = new HashSet<>();
-            List<Integer> includedIndices = new ArrayList<>();
 
             // 构建ClickHouse表的创建查询
             createTableQuery.append("CREATE TABLE IF NOT EXISTS ").append(clickHouseTableName).append(" (");
 
             for (int i = 1; i <= columnCount; i++) {
                 String columnName = metaData.getColumnName(i);
-
-                // 完全忽略 _id 列（不创建、不插入）
-                if ("_id".equalsIgnoreCase(columnName)) {
-                    continue;
-                }
-
-                String pinyinColumnName = chinesetopinyin.chineseToPinyin(columnName); // 转换字段名
-                // 保留原始的前导下划线
-                if (columnName.startsWith("_") && !pinyinColumnName.startsWith("_")) {
-                    pinyinColumnName = "_" + pinyinColumnName;
-                }
-
-                // 去重：如果转换后发生重复，则追加递增后缀
-                String uniqueName = pinyinColumnName;
-                int suffix = 1;
-                while (usedNames.contains(uniqueName)) {
-                    uniqueName = pinyinColumnName + "_" + suffix;
-                    suffix++;
-                }
-                usedNames.add(uniqueName);
-
+                String pinyinColumnName = chinesetopinyin.chineseToPinyin(columnName); // 调用接口转换字段名
                 String sqlType = metaData.getColumnTypeName(i);
                 String clickHouseType = mapSqlTypeToClickHouseType(sqlType);
 
-                // 记录首个有效列作为 ORDER BY
-                if (firstColumn == null) {
-                    firstColumn = uniqueName;
+                if (i == 1) {
+                    firstColumn = pinyinColumnName; // 设置第一个列名用于ORDER BY
                 }
 
-                if (columns.length() > 0) {
+                columns.append(pinyinColumnName); // 构建列名字符串
+                placeholders.append("?"); // 构建占位符字符串
+                createTableQuery.append(pinyinColumnName).append(" ").append(clickHouseType); // 构建创建表的SQL语句
+
+                if (i < columnCount) {
                     columns.append(", ");
                     placeholders.append(", ");
                     createTableQuery.append(", ");
                 }
-                columns.append(uniqueName);
-                placeholders.append("?");
-                createTableQuery.append(uniqueName).append(" ").append(clickHouseType);
-
-                includedIndices.add(i);
             }
 
-            // 追加常量列：tablename（SQL Server 表名）
-            if (columns.length() > 0) {
-                columns.append(", ");
-                placeholders.append(", ");
-                createTableQuery.append(", ");
-            }
-            columns.append("tablename");
-            placeholders.append("?");
-            createTableQuery.append("tablename String");
-
-            // 如果没有有效列或首列被忽略，则使用 tablename 作为 ORDER BY
-            if (firstColumn == null) {
-                firstColumn = "tablename";
-            }
             createTableQuery.append(") ENGINE = MergeTree() ORDER BY ").append(firstColumn).append(";");
 
-            // 第二步：连接到ClickHouse并创建表
+            // 第二步：连接到ClickHouse
             clickHouseConnection = DriverManager.getConnection(CLICKHOUSE_URL, CLICKHOUSE_USER, CLICKHOUSE_PASSWORD);
             Statement clickHouseStatement = clickHouseConnection.createStatement();
+
+            // 如果ClickHouse表不存在，则创建它 (多线程下可能会抛出已存在的异常，这里忽略即可)
             try {
-                System.out.println("Creating table with query: " + createTableQuery.toString());
+                if (partition == 0) System.out.println("Creating table with query: " + createTableQuery.toString());
                 clickHouseStatement.execute(createTableQuery.toString());
-                System.out.println("Table created successfully in ClickHouse.");
             } catch (SQLException e) {
-                System.err.println("Error creating table in ClickHouse: " + e.getMessage());
-                System.err.println("CreateTableQuery: " + createTableQuery.toString());
-                return;
+                // 忽略并发创建表导致的报错
             }
 
             // 准备ClickHouse的插入查询
-            System.out.println(clickHouseTableName);
             String clickHouseInsertQuery = String.format("INSERT INTO %s (%s) VALUES (%s)", clickHouseTableName, columns, placeholders);
             clickHousePreparedStatement = clickHouseConnection.prepareStatement(clickHouseInsertQuery);
+
+            // ==========================================
+            // 核心修改点：将你自定义的 CUSTOM_WHERE_SQLSERVER 拼接到拉取语句中
+            // ==========================================
+            String sqlServerQuery = String.format(
+                    "SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS RowNum FROM %s %s) AS TempTable WHERE RowNum %% 10 = ?",
+                    sqlServerTableName,
+                    CUSTOM_WHERE_SQLSERVER  // 直接拼上你配置的 WHERE 条件
+            );
+
+            if (partition == 0) {
+                System.out.println("SQL Server 查询语句: " + sqlServerQuery);
+            }
 
             // 第三步：处理来自SQL Server的每一行，并插入到ClickHouse中
             boolean success = false;
             while (!success) {
                 try {
-                    sqlServerPreparedStatement = sqlServerConnection.prepareStatement(String.format(SQL_SERVER_QUERY_TEMPLATE, sqlServerTableName));
+                    sqlServerPreparedStatement = sqlServerConnection.prepareStatement(sqlServerQuery);
                     sqlServerPreparedStatement.setInt(1, partition); // 设置分片编号
                     resultSet = sqlServerPreparedStatement.executeQuery();
 
                     int count = 0;
                     while (resultSet.next()) {
-                        // 写入保留列（跳过 _id）
-                        for (int k = 0; k < includedIndices.size(); k++) {
-                            int srcIndex = includedIndices.get(k);
-                            String value = resultSet.getString(srcIndex);
+                        for (int j = 1; j <= columnCount; j++) {
+                            String value = resultSet.getString(j);
                             if (value != null) {
-                                String typeName = metaData.getColumnTypeName(srcIndex);
-                                if (typeName.equalsIgnoreCase("DATETIME") || typeName.equalsIgnoreCase("TIMESTAMP")
-                                        || typeName.equalsIgnoreCase("SMALLDATETIME") || typeName.equalsIgnoreCase("DATETIME2")) {
-                                    value = value.substring(0, 19); // "YYYY-MM-DD hh:mm:ss"
+                                // 处理ClickHouse的DateTime格式
+                                if (metaData.getColumnTypeName(j).equalsIgnoreCase("DATETIME") || metaData.getColumnTypeName(j).equalsIgnoreCase("TIMESTAMP")) {
+                                    value = value.substring(0, 19); // 截断为"YYYY-MM-DD hh:mm:ss"
                                 }
-                                value = value.replace("\n", "").replace("\t", "").replace("\r", "");
+                                value = value.replace("\n", "").replace("\t", "").replace("\r", ""); // 移除换行符、制表符和回车符
                             }
-                            clickHousePreparedStatement.setString(k + 1, value);
+                            clickHousePreparedStatement.setString(j, value); // 设置插入值
                         }
-
-                        // 写入 tablename 常量（SQL Server 表名）
-                        clickHousePreparedStatement.setString(includedIndices.size() + 1, sqlServerTableName);
-
-                        clickHousePreparedStatement.addBatch();
+                        clickHousePreparedStatement.addBatch(); // 添加到批处理中
                         count++;
 
                         if (count % BATCH_SIZE == 0) {
-                            clickHousePreparedStatement.executeBatch();
+                            clickHousePreparedStatement.executeBatch(); // 执行批处理
                             System.out.println("Inserted " + count + " rows into ClickHouse for partition " + partition + ".");
                         }
                     }
 
+                    // 执行剩余的批处理
                     if (count % BATCH_SIZE != 0) {
                         clickHousePreparedStatement.executeBatch();
                         System.out.println("Inserted " + count + " rows into ClickHouse for partition " + partition + ".");
                     }
-                    success = true;
+                    success = true; // 标记成功
                 } catch (SQLException e) {
                     System.err.println("Error inserting into ClickHouse for partition " + partition + ": " + e.getMessage());
                     System.err.println("Retrying partition " + partition + "...");
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(5000); // 等待5秒钟后重试
                     } catch (InterruptedException ie) {
                         ie.printStackTrace();
                     }
@@ -272,6 +236,7 @@ public class from_csv_to_ck_check_temp {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
+            // 关闭资源
             try {
                 if (resultSet != null) resultSet.close();
                 if (sqlServerPreparedStatement != null) sqlServerPreparedStatement.close();
@@ -286,42 +251,31 @@ public class from_csv_to_ck_check_temp {
 
     // 将SQL Server数据类型映射到ClickHouse数据类型
     private static String mapSqlTypeToClickHouseType(String sqlType) {
+        // (保持原有逻辑不变...)
         switch (sqlType.toUpperCase()) {
             case "INT":
-            case "INTEGER":
-                return "Int32";
-            case "BIGINT":
-                return "Int64";
-            case "SMALLINT":
-                return "Int16";
-            case "TINYINT":
-                return "Int8";
+            case "INTEGER": return "Int32";
+            case "BIGINT": return "Int64";
+            case "SMALLINT": return "Int16";
+            case "TINYINT": return "Int8";
             case "FLOAT":
-                return "Float64";
             case "DOUBLE":
             case "REAL":
-                return "Float64";
             case "DECIMAL":
-            case "NUMERIC":
-                return "Float64";
-            case "BIT":
-                return "UInt8";
+            case "NUMERIC": return "Float64";
+            case "BIT": return "UInt8";
             case "CHAR":
             case "NCHAR":
             case "VARCHAR":
             case "NVARCHAR":
             case "TEXT":
-            case "NTEXT":
-                return "String";
-            case "DATE":
-                return "Date";
+            case "NTEXT": return "String";
+            case "DATE": return "Date";
             case "DATETIME":
             case "SMALLDATETIME":
             case "DATETIME2":
-            case "TIMESTAMP":
-                return "DateTime";
-            default:
-                return "String"; // 如果类型未知，默认为String
+            case "TIMESTAMP": return "DateTime";
+            default: return "String";
         }
     }
 
@@ -356,17 +310,20 @@ public class from_csv_to_ck_check_temp {
     // 将数据量写入Excel文件
     private static void writeDataCountsToExcel(String sqlServerTableName, String clickHouseTableName) throws Exception {
         String fullClickHouseTableName = CLICKHOUSE_DATABASE + "." + clickHouseTableName;
-        // 获取SQL Server表的数据量
+
+        // 1. 获取SQL Server表的数据量 (拼接你定义的 SQL Server WHERE 条件)
         int sqlServerRowCount;
         try (Connection sqlServerConnection = DriverManager.getConnection(SQL_SERVER_URL, SQL_SERVER_USER, SQL_SERVER_PASSWORD)) {
-            String sqlServerCountQuery = "SELECT COUNT(*) FROM " + sqlServerTableName;
+            String sqlServerCountQuery = "SELECT COUNT(*) FROM " + sqlServerTableName + " " + CUSTOM_WHERE_SQLSERVER;
+            System.out.println("SQL Server 验证语句: " + sqlServerCountQuery);
             sqlServerRowCount = getTableRowCount(sqlServerConnection, sqlServerCountQuery);
         }
 
-        // 获取ClickHouse表的数据量
+        // 2. 获取ClickHouse表的数据量 (拼接你定义的 ClickHouse WHERE 条件)
         int clickHouseRowCount;
         try (Connection clickHouseConnection = DriverManager.getConnection(CLICKHOUSE_URL, CLICKHOUSE_USER, CLICKHOUSE_PASSWORD)) {
-            String clickHouseCountQuery = "SELECT COUNT(*) FROM " + fullClickHouseTableName;
+            String clickHouseCountQuery = "SELECT COUNT(*) FROM " + fullClickHouseTableName + " " + CUSTOM_WHERE_CLICKHOUSE;
+            System.out.println("ClickHouse 验证语句: " + clickHouseCountQuery);
             clickHouseRowCount = getTableRowCount(clickHouseConnection, clickHouseCountQuery);
         }
 

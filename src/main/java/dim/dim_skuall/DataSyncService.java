@@ -414,7 +414,7 @@ public class DataSyncService {
     // 数据类型转换方法
     // ============================================================
     private Object convertValue(Object value, String sourceType, String targetType) {
-        if (value == null || "NULL".equals(String.valueOf(value).trim())) {
+        if (value == null) {
             return getDefaultValueForNull(targetType);
         }
         return convertByClickHouseType(value, targetType);
